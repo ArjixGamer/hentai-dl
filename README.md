@@ -1,3 +1,4 @@
+```
 Usage: hentaidl.py [OPTIONS]
 
 Options:
@@ -17,3 +18,4 @@ Options:
 
   -dd, --download-dir DIRECTORY   Download directory.
   --help                          Show this message and exit.
+```
