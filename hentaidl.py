@@ -254,9 +254,12 @@ if __name__ == '__main__':
         elif download_all:
             data = scrape_database()
             type_='database'
-
+        else:
+            type_ = None
         if type_ == 'search':
             prepare_download(user_input(data), 1, external_downloader, thumb_dl_flag, skip_download, download_dir, stream)
+        elif type_:
+            pass
         else:
             prepare_download(data, 0, external_downloader, thumb_dl_flag, skip_download, download_dir, stream)
     main()
