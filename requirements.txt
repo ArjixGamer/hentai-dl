@@ -1,1 +1,2 @@
-anime_downloader
+anime-downloader
+pySmartDL 
