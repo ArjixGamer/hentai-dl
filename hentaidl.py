@@ -15,7 +15,7 @@ def isNum(string_):
         return True
     except ValueError:
         return False
-
+#i dont know what tf is going on here
 
 def search(query):
     results = {}
@@ -54,14 +54,16 @@ def search(query):
     results = copy.copy(copy_)
 
     return results
-
+#this just looks like some shitty spaghetti search shit
 
 def scrape_database(max_=50):
     results = {}
+    #ah yes, my favorite, no results
     base_url = 'http://hentaigasm.com/page/{}/'
     for i in range(1, max_):
         try:
             soup = helpers.soupify(helpers.get(base_url.format(i)).text)
+            #I do like me some soup
         except Exception:
             continue
         all_hentai = soup.find_all('div', attrs={'class': lambda e: e.startswith('post-') if e else False})
@@ -87,6 +89,7 @@ def scrape_database(max_=50):
                     'thumb': thumbnail,
                     'ep_num': ep_num
                     }
+                #sluggy, tf does that mean
     copy_ = {}
     for hentai, val in results.items():
         for ____, ep in results[hentai]['eps'].items():
@@ -104,10 +107,11 @@ def get_video_link(ep_link):
     soup = helpers.soupify(helpers.get(ep_link).text)
     streaming_link = soup.find('a', download=True, href=True)['href']
     return streaming_link.replace(' ', '%20')
+#I do prefer streaming
 
 
 def prepare_download(data, type_, external_downloader, thumb_dl_flag, skip_download, download_dir, stream):
-
+#random space now being used for a comment
     if type_ == 1:
         eps = data['links']
         for episode in eps:
@@ -139,6 +143,7 @@ def prepare_download(data, type_, external_downloader, thumb_dl_flag, skip_downl
                 downloader(ep_data, thumb_dl_flag, skip_download, stream)
 
 import shutil
+#shutil - shut il - shut it
 def stream(data):
     link = data['link']
     title = data['title']
@@ -185,6 +190,7 @@ def downloader(data, thumb_dl_flag, skip_download, stream_):
                 f.write(requests.get(data['thumb_url']).content)
 
 def user_input(data):
+    #this is where we gather all of your personal information and send it to our servers to store and recommend cringy hentai ads to you with your favorite characters in it
     headers = ['SlNo', 'Title']
     count = -1
     table1 = []
@@ -203,6 +209,7 @@ def user_input(data):
 
 if __name__ == '__main__':
     @click.command()
+    #I command you to click me
     @click.option(
         '--search', '-s', 'search_query',
         required=False, default='',
@@ -242,7 +249,7 @@ if __name__ == '__main__':
         default=os.getcwd()
         )
     def main(search_query, download_all, external_downloader, thumb_dl_flag, skip_download, download_dir, stream):
-
+#another random space, geez arjix you are wasting space here
         if bool(search_query) and bool(download_all):
             data = search(search_query)
             type_ = 'database'
@@ -265,3 +272,4 @@ if __name__ == '__main__':
         else:
             prepare_download(data, 0, external_downloader, thumb_dl_flag, skip_download, download_dir, stream)
     main()
+    #my IDE hates you for this random main() that you slapped here
